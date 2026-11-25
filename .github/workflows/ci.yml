@@ -23,9 +23,10 @@ jobs:
         run: npm ci
       - name: Correr Lint
         run: npm run lint
+      - name: Correr format
+        run: npm run format:check
       - name: Correr test:unit
         run: npm run test:unit
-      - name: Correr format:check
-        run: npm run format:check
+     
       
 
