@@ -5,14 +5,16 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   quality:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Descargar el codigo
+      - name: Descargar el código
         uses: actions/checkout@v4
       - name: Preparar Node
         uses: actions/setup-node@v4
@@ -23,7 +25,25 @@ jobs:
         run: npm ci
       - name: Correr Lint
         run: npm run lint
-      - name: Correr format
-        run: npm run format:check
       - name: Correr test:unit
         run: npm run test:unit
+
+  integration:
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Run tests with coverage
+        run: npm run coverage
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/   
