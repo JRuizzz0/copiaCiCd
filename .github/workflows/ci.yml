@@ -23,18 +23,18 @@ jobs:
           cache: npm
       - name: Instalar dependencias
         run: npm ci
-      - name: Correr Lint
+      - name: Correr 
         run: npm run lint
       - name: Correr test:unit
-        run: npm run test:unit
+        run: npm run test:
 
   integration:
     needs: quality
-    runs-on: ubuntu-latest
+    runs-on: ubuntatest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: acns/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: npm
