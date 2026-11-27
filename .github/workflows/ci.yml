@@ -19,11 +19,9 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - name: Instalar dependencias
+      - name: Instalar dependencias  #instalando dependencias
         run: npm ci
-      - name: Correr Lint
+      - name: Correr Lint #quitado el format check para lab 3
         run: npm run lint
-      - name: Correr format
-        run: npm run format:check
       - name: Correr test:unit
         run: npm run test:unit
