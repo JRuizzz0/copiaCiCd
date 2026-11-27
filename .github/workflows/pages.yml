@@ -1,0 +1,22 @@
+name: Documentacion Pages
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions: {contents: read}
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Saludar
+        run: echo 'Hola desde GitHub Actions'
+      - name: Fallo controlado
+        run: exit 1
+      - name: Mostrar fecha
+        run: date
